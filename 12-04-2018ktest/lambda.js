@@ -1,4 +1,5 @@
 let AWS = require('aws-sdk');
+const ddb = new AWS.DynamoDB.DocumentClient();
 exports.handler = function (event, context, callback) {
 
 	console.log("Received request with payload", event);
@@ -25,5 +26,19 @@ exports.handler = function (event, context, callback) {
 			break;
 	}
 	event.Result = result;
+
+	ddb.put({
+		TableName: 'KumuTest',
+		Item: { 'ID': event.ID, 'Result': result }
+	}, function (err, data) {
+		if (err) {
+			//handle error
+			console.log("Fail");
+		} else {
+			//your logic goes here
+			console.log("Pass");
+		}
+	});
+	
 	callback(null, event);
 }
