@@ -1,1 +1,135 @@
-{"EDITOR_STATE":{"allProjectFiles":{"f091fc15-6ef5-488a-b327-31a5b5a806a0":{"id":"f091fc15-6ef5-488a-b327-31a5b5a806a0","parent":null,"name":"12-04-2018ktest","type":"DIRECTORY","isDirectory":true,"children":["032416a2-7e30-4d0b-ba76-ad7d3eba160e"],"isRemovable":false,"filePath":"12-04-2018ktest"},"032416a2-7e30-4d0b-ba76-ad7d3eba160e":{"id":"032416a2-7e30-4d0b-ba76-ad7d3eba160e","parent":"f091fc15-6ef5-488a-b327-31a5b5a806a0","name":"lambda.js","type":"LAMBDA_FILE","isDirectory":false,"children":[],"isRemovable":true,"filePath":"12-04-2018ktest/lambda.js","code":"let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\nexports.handler = function (event, context, callback) {\n\n\tconsole.log(\"Received request with payload\", event);\n\tlet operation = event.Operation;\n\tlet result = null;\n\tswitch (operation) {\n\t\tcase \"Add\":\n\t\t\tresult = event.LeftParameter + event.RightParameter;\n\t\t\tbreak;\n\t\tcase \"Subtract\":\n\t\t\tresult = event.LeftParameter - event.RightParameter;\n\t\t\tbreak;\n\t\tcase \"Multiply\":\n\t\t\tresult = event.LeftParameter * event.RightParameter;\n\t\t\tbreak;\n\t\tcase \"Devide\":\n\t\t\tresult = event.LeftParameter / event.RightParameter;\n\t\t\tbreak;\n\t\tcase \"Mod\":\n\t\t\tresult = event.LeftParameter % event.RightParameter;\n\t\t\tbreak;\n\t\tdefault:\n\t\t\tresult = \"Operation Not Permitted\";\n\t\t\tbreak;\n\t}\n\tevent.Result = result;\n\n\tddb.put({\n\t\tTableName: 'KumuTest',\n\t\tItem: { 'ID': event.ID, 'Result': result }\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\t//handle error\n\t\t\tconsole.log(\"Fail\");\n\t\t} else {\n\t\t\t//your logic goes here\n\t\t\tconsole.log(\"Pass\");\n\t\t}\n\t});\n\t\n\t//callback(null, event);\n}","triggers":[{"resourceName":"apigusEast1KTestCalpost","config":{}}],"config":{"memory":128,"timeout":60,"runtime":"nodejs8.10"},"version":59,"syncVersion":34}},"rootNode":"f091fc15-6ef5-488a-b327-31a5b5a806a0","openFiles":["032416a2-7e30-4d0b-ba76-ad7d3eba160e"],"currentFileId":"032416a2-7e30-4d0b-ba76-ad7d3eba160e","resources":{"apigusEast1KTestCalpost":{"name":"apigusEast1KTestCalpost","type":"API_GATEWAY","config":{"selectedRegion":"us-east-1","apiMode":0,"apiName":"KTest","endpointType":"EDGE","resourceMode":0,"resourceName":"Cal","resourcePath":"/Cal","restMethod":"POST","proxyIntegration":false,"enableCORS":false,"stageMode":0,"stageName":"test"},"globallyEditable":true},"ddbKumuTest":{"name":"ddbKumuTest","type":"DynamoDB","config":{"mode":0,"operation":"put","table":{"arn":"","name":"KumuTest","partitionKey":"ID","partitionKeyType":"S","hasSortKey":true,"sortKey":"ID","sortKeyType":"N","mode":0,"primaryKeyType":"N"},"parameters":{"Key":{},"Item":{"ID":5,"Result":5},"ExpressionAttributeValues":{}},"validator":{"validatableFields":{},"validity":true},"valid":true},"globallyEditable":false}},"envVariables":[{"lambdaId":"all","varKey":"SIGMA_AWS_ACC_ID","varValue":"","editable":false}],"packageJSON":{"dependencies":{"aws-sdk":{"name":"aws-sdk","version":"2.176.0","notRemovable":true}}},"lambdaId":"032416a2-7e30-4d0b-ba76-ad7d3eba160e","additionalFiles":[]},"PROJECT_META":{"projectName":"12-04-2018ktest","projectDescription":"","projectVersion":"1.0.0","projectRegion":"us-east-1","repoName":"12-04-2018ktest","repoUrl":"https://github.com/Kumudikatest/12-04-2018ktest","lastSave":1523514900090}}
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "f091fc15-6ef5-488a-b327-31a5b5a806a0": {
+        "id": "f091fc15-6ef5-488a-b327-31a5b5a806a0",
+        "parent": null,
+        "name": "12-04-2018ktest",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "032416a2-7e30-4d0b-ba76-ad7d3eba160e"
+        ],
+        "isRemovable": false,
+        "filePath": "12-04-2018ktest"
+      },
+      "032416a2-7e30-4d0b-ba76-ad7d3eba160e": {
+        "id": "032416a2-7e30-4d0b-ba76-ad7d3eba160e",
+        "parent": "f091fc15-6ef5-488a-b327-31a5b5a806a0",
+        "name": "lambda.js",
+        "type": "LAMBDA_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "12-04-2018ktest/lambda.js",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\nexports.handler = function (event, context, callback) {\n\n\tconsole.log(\"Received request with payload\", event);\n\tlet operation = event.Operation;\n\tlet result = null;\n\tswitch (operation) {\n\t\tcase \"Add\":\n\t\t\tresult = event.LeftParameter + event.RightParameter;\n\t\t\tbreak;\n\t\tcase \"Subtract\":\n\t\t\tresult = event.LeftParameter - event.RightParameter;\n\t\t\tbreak;\n\t\tcase \"Multiply\":\n\t\t\tresult = event.LeftParameter * event.RightParameter;\n\t\t\tbreak;\n\t\tcase \"Devide\":\n\t\t\tresult = event.LeftParameter / event.RightParameter;\n\t\t\tbreak;\n\t\tcase \"Mod\":\n\t\t\tresult = event.LeftParameter % event.RightParameter;\n\t\t\tbreak;\n\t\tdefault:\n\t\t\tresult = \"Operation Not Permitted\";\n\t\t\tbreak;\n\t}\n\tevent.Result = result;\n\n\tddb.put({\n\t\tTableName: 'KumuTest',\n\t\tItem: { 'ID': event.ID, 'Result': result }\n\t}, function (err, data) {\n\t\tif (err) {\n\t\t\t//handle error\n\t\t\tconsole.log(\"Fail\");\n\t\t} else {\n\t\t\t//your logic goes here\n\t\t\tconsole.log(\"Pass\");\n\t\t}\n\t});\n\t\n\t//callback(null, event);\n}",
+        "triggers": [
+          {
+            "resourceName": "apigusEast1KTestCalpost",
+            "config": {}
+          }
+        ],
+        "config": {
+          "memory": 128,
+          "timeout": 60,
+          "runtime": "nodejs8.10"
+        }
+      }
+    },
+    "rootNode": "f091fc15-6ef5-488a-b327-31a5b5a806a0",
+    "openFiles": [
+      "032416a2-7e30-4d0b-ba76-ad7d3eba160e"
+    ],
+    "currentFileId": "032416a2-7e30-4d0b-ba76-ad7d3eba160e",
+    "resources": {
+      "apigusEast1KTestCalpost": {
+        "name": "apigusEast1KTestCalpost",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 0,
+          "apiName": "KTest",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "Cal",
+          "resourcePath": "/Cal",
+          "restMethod": "POST",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 0,
+          "stageName": "test"
+        },
+        "globallyEditable": true
+      },
+      "ddbKumuTest": {
+        "name": "ddbKumuTest",
+        "type": "DynamoDB",
+        "config": {
+          "mode": 0,
+          "operation": "put",
+          "table": {
+            "arn": "",
+            "name": "KumuTest",
+            "partitionKey": "ID",
+            "partitionKeyType": "S",
+            "hasSortKey": true,
+            "sortKey": "ID",
+            "sortKeyType": "N",
+            "mode": 0,
+            "primaryKeyType": "N"
+          },
+          "parameters": {
+            "Key": {},
+            "Item": {
+              "ID": 5,
+              "Result": 5
+            },
+            "ExpressionAttributeValues": {}
+          },
+          "validator": {
+            "validatableFields": {},
+            "validity": true
+          },
+          "valid": true
+        },
+        "globallyEditable": false
+      }
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "editable": false,
+        "shouldPersist": false,
+        "displayOnly": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {
+        "aws-sdk": {
+          "name": "aws-sdk",
+          "version": "2.176.0",
+          "notRemovable": true
+        }
+      }
+    },
+    "lambdaId": "032416a2-7e30-4d0b-ba76-ad7d3eba160e",
+    "additionalFiles": []
+  },
+  "PROJECT_META": {
+    "projectName": "12-04-2018ktest",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "lastSave": 1542022642404
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "12-04-2018ktest",
+      "url": "https://github.com/Kumudikatest/12-04-2018ktest"
+    }
+  }
+}
